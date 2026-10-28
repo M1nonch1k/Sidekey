@@ -1,0 +1,14 @@
+# Personal data of whoever runs the app from this folder — never commit it.
+data/
+
+# Build output (attach the .exe to a GitHub Release instead).
+*.exe
+*.pdb
+
+# Temporary and editor files
+*.tmp
+*.broken-*
+selftest*/
+.vs/
+.vscode/
+Thumbs.db
