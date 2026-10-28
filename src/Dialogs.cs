@@ -14,8 +14,8 @@ namespace Sidekey
         readonly HotkeyBox hotkey = new HotkeyBox();
         readonly Label hotkeyWarn, cityLabel;
         readonly CheckBox tracking, autostart;
-        readonly NumericUpDown idle;
-        readonly ComboBox language = new DarkCombo();
+        readonly NumberBox idle;
+        readonly ComboBox language = new DarkCombo(), theme = new DarkCombo();
 
         public SettingsForm() : base(L.T("set.title"), 470)
         {
@@ -28,6 +28,17 @@ namespace Sidekey
             language.Margin = Theme.P(0, 0, 0, 4);
             Body.Auto(language);
             Body.Auto(Theme.Wrap(L.T("set.languageHint"), Theme.Small, Theme.Muted));
+
+            Section(L.T("set.theme"));
+            foreach (var t in Theme.Names) theme.Items.Add(L.T("theme." + t));
+            theme.SelectedIndex = Math.Max(0, Array.IndexOf(Theme.Names, s.Theme));
+            theme.Width = Theme.S(220);
+            theme.Margin = Theme.P(0, 0, 0, 4);
+            Body.Auto(theme);
+            Body.Auto(Theme.Wrap(L.T("set.themeHint"), Theme.Small, Theme.Muted));
+            var resetPanel = Theme.Btn(L.T("set.resetPanel"));
+            resetPanel.Click += (o, e) => App.Main.ResetPlacement();
+            Body.Auto(resetPanel).Margin = Theme.P(0, 4, 0, 0);
 
             Section(L.T("set.hotkey"));
             var defaultBtn = Theme.Btn(L.T("set.default"));
@@ -135,12 +146,15 @@ namespace Sidekey
             string lang = L.Languages[Math.Max(0, language.SelectedIndex), 0];
             bool langChanged = lang != s.Language;
             s.Language = lang;
+            string themeName = Theme.Names[Math.Max(0, theme.SelectedIndex)];
+            bool themeChanged = themeName != (s.Theme ?? "dark");
+            s.Theme = themeName;
             App.SaveSettings();
             App.SetTrayStatus(null);
             DialogResult = DialogResult.OK;
             Close();
-            // Интерфейс собирается при запуске, поэтому новый язык применяется после перезапуска.
-            if (langChanged && !App.SelfTesting && Dlg.Ask(L.T("set.restartAsk"), L.T("set.restart"), L.T("welcome.later")))
+            // Интерфейс собирается при запуске, поэтому новый язык и тема применяются после перезапуска.
+            if ((langChanged || themeChanged) && !App.SelfTesting && Dlg.Ask(L.T("set.restartAsk"), L.T("set.restart"), L.T("welcome.later")))
                 App.Restart();
         }
     }
@@ -490,7 +504,7 @@ namespace Sidekey
     class DelayForm : DarkForm
     {
         public int Seconds;
-        readonly NumericUpDown value;
+        readonly NumberBox value;
 
         public DelayForm(LaunchItem item) : base(L.T("delay.title"), 420)
         {
@@ -516,7 +530,6 @@ namespace Sidekey
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            value.Select(0, value.Text.Length);
             value.Focus();
         }
     }

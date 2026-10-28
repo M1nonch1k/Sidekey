@@ -20,6 +20,14 @@ namespace Sidekey
         public bool FirstRunDone;
         public int TimerMinutes = 5, TimerSeconds = 0;
         public int LastTab;
+        public string MusicFolder = "";     // папка для «Плеер → Мои треки»
+        public int PlayerVolume = 80;       // громкость своего плеера, 0…100
+        public bool PlayerShuffle;
+        public string PlayerRepeat = "off"; // off, list, track
+        public string Theme = "dark";       // dark, light, blue, red, green
+        public bool PanelLocked = true;     // замок: пока закрыт, панель нельзя двигать и растягивать
+        public bool PanelMoved;             // панель перенесли: показывать там, а не у правого края
+        public int PanelX, PanelY, PanelWidth, PanelHeight; // 0 — размер по умолчанию
 
         public bool HasCity() { return !string.IsNullOrEmpty(CityName); }
     }

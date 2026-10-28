@@ -1,7 +1,7 @@
 # Sidekey
 
 **A tiny side panel for Windows that opens with a keyboard shortcut.**
-Time tracking, notes, quick-launch buttons, a timer and the weather — in one `.exe` under 300 KB
+Time tracking, notes, quick-launch buttons, a timer, the weather, a volume mixer and a music player — in one `.exe` under 400 KB
 that needs no installation and uses about 30 MB of RAM.
 
 [Русская версия](README.ru.md)
@@ -20,11 +20,16 @@ that needs no installation and uses about 30 MB of RAM.
 - **Quick launch** — your own buttons that open a set of programs and websites in one click.
   Each item can have a delay (e.g. start an anti-cheat, wait 30 s, then start the game),
   and each button can have its own **global shortcut** that works even when the panel is hidden.
-- **Timer** — start, pause, reset, a sound and a Windows notification when it's done.
+- **Timer** — timer with a sound and a Windows notification, a stopwatch with laps, and a calculator.
 - **Weather** — current weather and a 4-day forecast for your city
   (via [Open-Meteo](https://open-meteo.com), no API key needed).
+- **Volume** — system volume and per-app volume, mute any app with one click.
+- **Player** — a lock-screen-style player with a big cover, seeking, shuffle and repeat:
+  **Now playing** controls whatever is playing in Windows (Spotify, YouTube in a browser, other players) — no sign-in;
+  **My tracks** plays mp3, m4a, flac, wav and wma files from a folder you choose.
 - **10 languages** — English, 中文, हिन्दी, Español, Français, العربية, বাংলা, Português, Русский, Deutsch.
-- Dark theme, opens at the right edge of the screen with **Ctrl + Alt + T** (configurable), lives in the tray.
+- Five themes (dark, light, dark blue, dark red, dark green). Opens at the right edge of the screen with **Ctrl + Alt + T**
+  (configurable); unlock the panel to move it anywhere and resize it a little (−10 % … +20 %). Lives in the tray.
 
 ## Privacy
 
@@ -32,6 +37,8 @@ that needs no installation and uses about 30 MB of RAM.
   No keystrokes, window titles, screen contents or browsing history.
 - All data stays on your computer in `%LOCALAPPDATA%\Sidekey\data` (plain JSON files).
 - The only network requests go to Open-Meteo: the city name when you search for it, then its coordinates.
+- The Player tab works locally: it talks to the app that is playing through Windows and plays files from the folder
+  you choose. It needs no account and sends nothing over the internet; only the folder path is saved in the settings.
 
 ## Install
 
@@ -40,7 +47,7 @@ that needs no installation and uses about 30 MB of RAM.
    click **More info → Run anyway**, or build it yourself from source (see below).
 3. Press **Ctrl + Alt + T** to open the panel. Optional: enable *Start with Windows* in Settings.
 
-Requirements: Windows 10 or 11 (uses .NET Framework 4.8, which is already part of Windows).
+Requirements: Windows 10 (version 1809 or newer) or 11 — uses .NET Framework 4.8, which is already part of Windows.
 
 ## Build from source
 

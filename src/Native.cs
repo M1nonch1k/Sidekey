@@ -29,6 +29,24 @@ namespace Sidekey
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        [DllImport("user32.dll")]
+        static extern bool SetWindowPos(IntPtr hWnd, IntPtr after, int x, int y, int cx, int cy, uint flags);
+
+        // Поднять окно на самый верх среди окон «поверх всех», не активируя и не двигая его.
+        public static void BringToTopmost(IntPtr hWnd)
+        {
+            const uint SWP_NOSIZE = 0x1, SWP_NOMOVE = 0x2, SWP_NOACTIVATE = 0x10;
+            SetWindowPos(hWnd, (IntPtr)(-1) /* HWND_TOPMOST */, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+        }
+
+        // Перетаскивание и растягивание окна без рамки силами Windows (WM_NCHITTEST / WM_NCLBUTTONDOWN).
+        public const int WM_NCHITTEST = 0x84, WM_NCLBUTTONDOWN = 0xA1, WM_EXITSIZEMOVE = 0x232;
+        public const int HTCAPTION = 2, HTLEFT = 10, HTRIGHT = 11, HTTOP = 12, HTTOPLEFT = 13, HTTOPRIGHT = 14,
+                         HTBOTTOM = 15, HTBOTTOMLEFT = 16, HTBOTTOMRIGHT = 17;
+
+        [DllImport("user32.dll")]
         public static extern bool SetProcessDPIAware();
         [DllImport("user32.dll")]
         public static extern bool DestroyIcon(IntPtr hIcon);
@@ -81,8 +99,10 @@ namespace Sidekey
             finally { CloseHandle(h); }
         }
 
+        // В светлой теме заголовки окон и полосы прокрутки остаются стандартными (светлыми).
         public static void DarkTitleBar(IntPtr hWnd)
         {
+            if (!Theme.IsDark) return;
             try
             {
                 int on = 1;
@@ -94,7 +114,7 @@ namespace Sidekey
 
         public static void DarkTheme(IntPtr hWnd, string theme)
         {
-            try { SetWindowTheme(hWnd, theme, null); } catch { }
+            try { SetWindowTheme(hWnd, Theme.IsDark ? theme : "Explorer", null); } catch { }
         }
     }
 }

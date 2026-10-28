@@ -152,7 +152,7 @@ namespace Sidekey
             return path;
         }
 
-        string DisplayName(string path)
+        public string DisplayName(string path)
         {
             string name;
             if (nameByPath.TryGetValue(path, out name)) return name;

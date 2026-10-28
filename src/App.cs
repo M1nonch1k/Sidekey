@@ -48,6 +48,7 @@ namespace Sidekey
             // Язык по умолчанию — английский; у тех, кто уже пользовался программой до появления
             // выбора языка (интерфейс был только русским), остаётся русский.
             if (string.IsNullOrEmpty(Settings.Language)) Settings.Language = Settings.FirstRunDone ? "ru" : "en";
+            Sidekey.Theme.Apply(Settings.Theme);
             L.Load(Settings.Language);
             Theme.UseFontsFor(L.Code);
             Notes = Store.Load<NotesData>("notes.json");
