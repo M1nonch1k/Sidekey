@@ -1,7 +1,7 @@
 # Sidekey
 
 **A tiny side panel for Windows that opens with a keyboard shortcut.**
-Time tracking, notes, quick-launch buttons, a timer and the weather — in one 110 KB `.exe`
+Time tracking, notes, quick-launch buttons, a timer and the weather — in one `.exe` under 300 KB
 that needs no installation and uses about 30 MB of RAM.
 
 [Русская версия](README.ru.md)
