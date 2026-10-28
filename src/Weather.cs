@@ -42,7 +42,7 @@ namespace Sidekey
             var req = (HttpWebRequest)WebRequest.Create(url);
             req.Timeout = 10000;
             req.ReadWriteTimeout = 10000;
-            req.UserAgent = "Sidekey/0.2";
+            req.UserAgent = "Sidekey/0.3";
             // Только gzip: «deflate» от сервера .NET Framework распаковывает с ошибкой.
             req.AutomaticDecompression = DecompressionMethods.GZip;
             using (var resp = req.GetResponse())

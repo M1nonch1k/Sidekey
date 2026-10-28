@@ -7,8 +7,8 @@ using System.Windows.Forms;
 [assembly: System.Runtime.Versioning.TargetFramework(".NETFramework,Version=v4.8", FrameworkDisplayName = ".NET Framework 4.8")]
 [assembly: System.Reflection.AssemblyTitle("Sidekey")]
 [assembly: System.Reflection.AssemblyProduct("Sidekey")]
-[assembly: System.Reflection.AssemblyVersion("0.2.0.0")]
-[assembly: System.Reflection.AssemblyFileVersion("0.2.0.0")]
+[assembly: System.Reflection.AssemblyVersion("0.3.0.0")]
+[assembly: System.Reflection.AssemblyFileVersion("0.3.0.0")]
 
 namespace Sidekey
 {
